@@ -16,14 +16,15 @@ public class LearnArray {
 		Integer[] arr = {1,2,3,4,5,6};
 		//方式1：for循环，数组下标遍历；
 		for(int i=0;i<arr.length;i++) {
-			System.out.print(arr[i]+"\t");
+			System.out.print(String.format("下标：%d , 值为：%d%n",i,arr[i]));
 		}
 		System.out.println();
 		//方式2：增强for循环
 		for(Integer i:arr) {
-			System.out.print(i+"\t");
+			System.out.print(String.format("存放：%d%n", i));
 		}
 		//方式3：lambda表达式
+		Arrays.asList(arr).forEach(val->System.out.println(val));
 		
 	}
 	
