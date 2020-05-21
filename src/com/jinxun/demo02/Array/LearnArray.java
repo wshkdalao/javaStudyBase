@@ -109,5 +109,37 @@ public class LearnArray {
 		Arrays.sort(arr);
 		System.out.println(Arrays.toString(arr));
 	}
-
+	
+	//多维数组和不规则数组
+	@Test
+	public void testDouWeiArray() {
+		//定义一个二位数组，第一维表示用户，第二维表示用户的具体信息(1.编号；2.姓名；3.性别；)
+		//第一个二维数组：第一维必须指定容量；第二维可以不指定；
+		//一个一维数组的值，都对应一个新的数组(存在第二维中)；
+		String[][] users = new String[3][];
+		//第一个user
+		//指定第一个第二维数组的容量；每个第二维数组的容量可以不等；
+		users[0] = new String[3];
+		users[0][0] = "001";
+		users[0][1] = "小明";
+		users[0][2] = "男";
+		//第二个user
+		users[1] = new String[3];
+		users[1][0] = "002";
+		users[1][1] = "小芳";
+		users[1][2] = "女";
+		//第三个user
+		users[2] = new String[2];
+		users[2][0] = "003";
+		users[2][1] = "小黑";
+		for(String[] user:users) {
+			System.out.println(Arrays.toString(user));
+		}
+		//使用lambda表达式，遍历；下面的是一个一个值的输出；
+		Arrays.asList(users).forEach(user -> Arrays.asList(user).
+				forEach(val -> System.out.println(val)));
+		//使用lambda表达式，遍历；下面的是直接输出第二维数组；
+		Arrays.asList(users).forEach(user -> 
+				System.out.println(Arrays.toString(user)));
+	}
 }
