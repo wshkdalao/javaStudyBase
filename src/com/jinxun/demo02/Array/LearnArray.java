@@ -1,6 +1,7 @@
 package com.jinxun.demo02.Array;
 
 import java.util.Arrays;
+import java.util.Random;
 
 import org.junit.Test;
 
@@ -80,6 +81,33 @@ public class LearnArray {
 		//将arr1数组的最后三个填充为52
 		Arrays.fill(arr1, arr1.length-3, arr1.length, 52);
 		System.out.println(Arrays.toString(arr1));
+	}
+	
+	//数组排序
+	@Test
+	public void testSort() {
+		long time = System.currentTimeMillis();
+		//第一个容量为100的数组，随机给每一位赋0~100的值，然后给数组排序；
+		Integer[] arr = new Integer[100];
+		for(int i=0;i<arr.length;i++) {
+			arr[i] = new Random().nextInt(100)+1;
+		}
+		//从大到小排序
+		int tmp = 0 ;
+		for(int i=0;i<arr.length;i++) {
+			for(int j=i+1;j<arr.length;j++) {
+				if(arr[i]<arr[j]) {
+					tmp = arr[i];
+					arr[i] = arr[j];
+					arr[j] = tmp;
+				}
+			}
+		}
+		System.out.println(Arrays.toString(arr));
+		System.out.println("用时："+(System.currentTimeMillis()-time));
+		//使用工具类排序：默认从小到大排序
+		Arrays.sort(arr);
+		System.out.println(Arrays.toString(arr));
 	}
 
 }
