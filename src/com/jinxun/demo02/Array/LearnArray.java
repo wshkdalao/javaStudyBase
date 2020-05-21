@@ -69,5 +69,17 @@ public class LearnArray {
 		System.out.println("arr1 = "+Arrays.toString(arr1));
 	}
 	
+	//数组填充
+	@Test
+	public void testFillArray() {
+		Integer[] arr1 = {1,2,23,4,5};
+		//将arr1全填充为0
+		Arrays.fill(arr1, 0);
+		System.out.println(Arrays.toString(arr1));
+		//范围填充:参数2/3都是从1开始计数；
+		//将arr1数组的最后三个填充为52
+		Arrays.fill(arr1, arr1.length-3, arr1.length, 52);
+		System.out.println(Arrays.toString(arr1));
+	}
 
 }
