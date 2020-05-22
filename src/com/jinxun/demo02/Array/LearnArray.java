@@ -1,6 +1,8 @@
 package com.jinxun.demo02.Array;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import org.junit.Test;
@@ -110,6 +112,27 @@ public class LearnArray {
 		System.out.println(Arrays.toString(arr));
 	}
 	
+	//Arrays.equals()方法:返回boolean，比较每一个值，有一个值不等就返回false;
+	@Test
+	public void testEquals() {
+		int[] arr1 = {1,2,3,4};
+		int[] arr2 = {1,2,3,4};
+		int[] arr3 = {1,2,3};
+		int[] arr4 = {1,2,5,6};
+		int[] arr5 = {5,6,7,8};
+		System.out.println(Arrays.equals(arr1, arr2));
+		System.out.println(Arrays.equals(arr1, arr3));
+		System.out.println(Arrays.equals(arr1, arr4));
+		System.out.println(Arrays.equals(arr1, arr5));
+	}
+	//Arrays.testBinarySearch()方法:返回数组下标，在参数1数组中找到值为key的元素，底层使用二分查找；
+	@Test
+	public void testBinarySearch() {
+		int[] arr1 = {1,2,3,4};
+		int a = Arrays.binarySearch(arr1, 4);
+		System.out.println(a);
+	}
+	
 	//多维数组和不规则数组
 	@Test
 	public void testDouWeiArray() {
@@ -141,5 +164,85 @@ public class LearnArray {
 		//使用lambda表达式，遍历；下面的是直接输出第二维数组；
 		Arrays.asList(users).forEach(user -> 
 				System.out.println(Arrays.toString(user)));
+	}
+	
+	//练习1：
+	//1.给定一个整数数组nums 和 一个目标值target，在数组中 找出两个元素 和为 target,并输出这两个元素的下标；
+	//不输出重复元素；
+	@Test
+	public void testTwoSum() {
+		int[] arr = {1,2,7,11,15};
+		int target = 9;
+		System.out.println(Arrays.toString(arr));
+		
+	}
+	//解法1：
+	public int[] testPractice011(int[] nums,int target) {
+		for(int i=0;i<nums.length;i++) {
+			for(int j=i+1;j<nums.length;j++) {
+				//从i的后面一个开始，这样就可以避免[i=1,j=5] 和 [j=1，i=5]的情况了；
+				if((nums[i]+nums[j])==target) {
+					return new int[] {i,j};
+				}
+			}
+		}
+		return null;
+	}
+	//解法2：
+		public int[] testPractice012(int[] nums,int target) {
+			//先对数组进行排序
+			Arrays.sort(nums);
+			for(int i=0;i<nums.length;i++) {
+				if(nums[i]>=target) break;//第一个数大于target，则第二个数一定>=target
+				for(int j=i+1;j<nums.length;j++) {
+					if(nums[j]>target) break;
+					//从i的后面一个开始，这样就可以避免[i=1,j=5] 和 [j=1，i=5]的情况了；
+					if((nums[i]+nums[j])==target) {
+						return new int[] {i,j};
+					}
+				}
+			}
+			return null;
+		}
+	//解法3：
+	public int[] testPractice01(int[] nums ,int target) {
+		//先对数组进行排序
+		Arrays.sort(nums);
+		Map<Integer,Integer> map = new HashMap<Integer,Integer>();
+		//将数组的值和下标都存放到map集合中
+		for(int index=0;index<nums.length;index++) {
+			if(nums[index]>9) break;
+			map.put(nums[index], index);
+		}
+		for(int i=0;i<nums.length;i++) {
+			if(map.containsKey(target-nums[i])) {
+				return new int[] {map.get(target-nums[i]),i};
+			}
+		}
+		return null;
+	}
+	
+	//练习2：
+	//查看执行结果
+	@Test
+	public void test01() {
+		int[] arr = {1,2,7,11,15};
+		testPractice02(arr);
+		System.out.println(Arrays.toString(arr));
+	}
+	public void testPractice02(int[] arr) {
+//		arr = new int[] {1,1,1,1,1}; //修改引用，不会改变test01中的arr的引用；
+		Arrays.fill(arr, 0); //修改引用指向的值，会改变test01中的arr引用指向的值；
+	}
+	//练习3：
+	//查看执行结果
+	@Test
+	public void test02() {
+		int[] arr1;
+		int[] arr2 = new int[3];
+		String[] arr3 = new String[3];
+//		System.out.println(Arrays.toString(arr1)); //编译报错，未初始化
+		System.out.println(Arrays.toString(arr2));
+		System.out.println(Arrays.toString(arr3));
 	}
 }
