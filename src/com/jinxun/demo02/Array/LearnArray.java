@@ -209,15 +209,14 @@ public class LearnArray {
 		//先对数组进行排序
 		Arrays.sort(nums);
 		Map<Integer,Integer> map = new HashMap<Integer,Integer>();
-		//将数组的值和下标都存放到map集合中
-		for(int index=0;index<nums.length;index++) {
-			if(nums[index]>9) break;
-			map.put(nums[index], index);
-		}
 		for(int i=0;i<nums.length;i++) {
+			if(nums[i] > target) return null;
+			//直接看集合中是否包含这个值，包含则说明存在两值和为target；
 			if(map.containsKey(target-nums[i])) {
 				return new int[] {map.get(target-nums[i]),i};
 			}
+			//不存才将该值及下标存在map中，并且该值只会存一次；
+			map.put(nums[i],i);
 		}
 		return null;
 	}
