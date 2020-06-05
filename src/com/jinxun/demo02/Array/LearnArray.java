@@ -171,11 +171,49 @@ public class LearnArray {
 	//不输出重复元素；
 	@Test
 	public void testTwoSum() {
-		int[] arr = {1,2,7,11,15};
+		int[] arr12 = {1,21,7,121,2,12,1,13,11,15};
+		int[] arr13 = {1,2,7,13,15};
+		int[] arr = {-1,0};
 		int target = 9;
-		System.out.println(Arrays.toString(arr));
-		
+		int[] arr1 = twoSum02(arr13,target);
+		System.out.println(Arrays.toString(arr1));
 	}
+	//两数和，输入有序数组，输出元素在数组中的位置，且位置升序；
+	//解法1：
+//	public int[] twoSum(int[] numbers, int target) {
+//        Map<Integer,Integer> map = new HashMap<Integer,Integer>();
+//        for(int i=0;i<numbers.length;i++){
+////            if(numbers[i]>target) return null;
+//            int key = target - numbers[i];
+//            if(map.containsKey(key)){
+//                if(map.get(key)>i){
+//                    return new int[]{i,map.get(key)};
+//                }
+//                return new int[]{map.get(key),i};
+//            }
+//            map.put(numbers[i],i);
+//        }
+//        return null;
+//    }
+	//解法2：
+	public int[] twoSum02(int[] numbers,int target) {
+		if(numbers == null) return null;
+		int lowIndex = 0,highIndex = numbers.length -1;
+		while(lowIndex <= highIndex) {
+			int sum = numbers[lowIndex] + numbers[highIndex];
+			if(sum > target) {
+				highIndex--;
+			}else if(sum < target) {
+				lowIndex++;
+			}else {
+				return new int[] {lowIndex+1,highIndex+1};
+			}
+		}
+		return null;
+	}
+	
+	
+	//两数之和，数组无序，输出下标；
 	//解法1：
 	public int[] testPractice011(int[] nums,int target) {
 		for(int i=0;i<nums.length;i++) {
@@ -206,19 +244,17 @@ public class LearnArray {
 		}
 	//解法3：
 	public int[] testPractice01(int[] nums ,int target) {
-		//先对数组进行排序
-		Arrays.sort(nums);
-		Map<Integer,Integer> map = new HashMap<Integer,Integer>();
-		for(int i=0;i<nums.length;i++) {
-			if(nums[i] > target) return null;
-			//直接看集合中是否包含这个值，包含则说明存在两值和为target；
+		
+		 Map<Integer,Integer> map = new HashMap<Integer,Integer>(); 
+		 for(int i=0;i<nums.length;i++) {
+			 //直接看集合中是否包含这个值，包含则说明存在两值和为target；
 			if(map.containsKey(target-nums[i])) {
-				return new int[] {map.get(target-nums[i]),i};
-			}
+				return new int[]{map.get(target-nums[i]),i}; 
+			} 
 			//不存才将该值及下标存在map中，并且该值只会存一次；
-			map.put(nums[i],i);
-		}
-		return null;
+		 	map.put(nums[i],i); 
+		 } 
+		 return null;
 	}
 	
 	//练习2：
